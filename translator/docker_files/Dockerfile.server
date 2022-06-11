@@ -1,0 +1,23 @@
+FROM python:3.8-slim
+
+COPY setup/requirements.txt /setup/
+
+
+RUN pip install --trusted-host pypi.python.org --no-cache-dir -r /setup/requirements.txt && \
+    pip install --upgrade pip
+
+RUN export PYTHONPATH=.
+
+ADD . /app
+
+WORKDIR /app
+
+ENV PYTHONUNBUFFERED 1
+ENV DISPLAY=:99
+
+
+COPY . /app
+
+EXPOSE 6000
+
+RUN chmod 755 /app/scripts/*.sh

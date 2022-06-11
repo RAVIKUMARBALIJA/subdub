@@ -19,66 +19,67 @@ services:
     tty: true
     volumes: 
       - ${SRC_MOUNT_VOLUME}:${DEST_MOUNT_VOLUME}
-  audiototext:
-    image: auditotext_converter
-    build: 
-      context: ./audiototext
-      dockerfile: docker_files/Dockerfile.server
-    environment: 
-      - REDIS_HOST=redis-server
-      - SRC_MOUNT_VOLUME=${SRC_MOUNT_VOLUME}
-      - DEST_MOUNT_VOLUME=${DEST_MOUNT_VOLUME}
-    entrypoint: /app/scripts/start_server.sh
-    tty: true
-    depends_on:
-      - redis-server
-    volumes: 
-      - ${SRC_MOUNT_VOLUME}:${DEST_MOUNT_VOLUME}
+      - ./translator:/app
+  # audiototext:
+  #   image: auditotext_converter
+  #   build: 
+  #     context: ./audiototext
+  #     dockerfile: docker_files/Dockerfile.server
+  #   environment: 
+  #     - REDIS_HOST=redis-server
+  #     - SRC_MOUNT_VOLUME=${SRC_MOUNT_VOLUME}
+  #     - DEST_MOUNT_VOLUME=${DEST_MOUNT_VOLUME}
+  #   entrypoint: /app/scripts/start_server.sh
+  #   tty: true
+  #   depends_on:
+  #     - redis-server
+  #   volumes: 
+  #     - ${SRC_MOUNT_VOLUME}:${DEST_MOUNT_VOLUME}
   
-  texttoaudio:
-    image: texttoaudio_converter
-    build: 
-      context: ./texttoaudio
-      dockerfile: docker_files/Dockerfile.server
-    environment: 
-      - REDIS_HOST=redis-server
-      - SRC_MOUNT_VOLUME=${SRC_MOUNT_VOLUME}
-      - DEST_MOUNT_VOLUME=${DEST_MOUNT_VOLUME}
-    entrypoint: /app/scripts/start_server.sh
-    tty: true
-    depends_on:
-      - redis-server
-    volumes: 
-      - ${SRC_MOUNT_VOLUME}:${DEST_MOUNT_VOLUME}
+  # texttoaudio:
+  #   image: texttoaudio_converter
+  #   build: 
+  #     context: ./texttoaudio
+  #     dockerfile: docker_files/Dockerfile.server
+  #   environment: 
+  #     - REDIS_HOST=redis-server
+  #     - SRC_MOUNT_VOLUME=${SRC_MOUNT_VOLUME}
+  #     - DEST_MOUNT_VOLUME=${DEST_MOUNT_VOLUME}
+  #   entrypoint: /app/scripts/start_server.sh
+  #   tty: true
+  #   depends_on:
+  #     - redis-server
+  #   volumes: 
+  #     - ${SRC_MOUNT_VOLUME}:${DEST_MOUNT_VOLUME}
   
-  textoaudio_worker:
-    image: textoaudio_worker
-    build: 
-      context: ./texttoaudio
-      dockerfile: docker_files/Dockerfile.worker
-    environment: 
-      - REDIS_HOST=redis-server
-      - EXEC_MODE=worker
-      - MAPPED_VOLUME=${DEST_MOUNT_VOLUME}
-    entrypoint: /app/scripts/start_worker.sh
-    tty: true
-    depends_on:
-      - redis-server
-    volumes: 
-      - ${SRC_MOUNT_VOLUME}:${DEST_MOUNT_VOLUME}
+  # textoaudio_worker:
+  #   image: textoaudio_worker
+  #   build: 
+  #     context: ./texttoaudio
+  #     dockerfile: docker_files/Dockerfile.worker
+  #   environment: 
+  #     - REDIS_HOST=redis-server
+  #     - EXEC_MODE=worker
+  #     - MAPPED_VOLUME=${DEST_MOUNT_VOLUME}
+  #   entrypoint: /app/scripts/start_worker.sh
+  #   tty: true
+  #   depends_on:
+  #     - redis-server
+  #   volumes: 
+  #     - ${SRC_MOUNT_VOLUME}:${DEST_MOUNT_VOLUME}
   
-  audiototext_worker:
-    image: audiototext_worker
-    build: 
-      context: ./audiototext
-      dockerfile: docker_files/Dockerfile.worker
-    environment: 
-      - REDIS_HOST=redis-server
-      - EXEC_MODE=worker
-      - MAPPED_VOLUME=${DEST_MOUNT_VOLUME}
-    entrypoint: /app/scripts/start__worker.sh
-    tty: true
-    depends_on:
-      - redis-server
-    volumes: 
-      - ${SRC_MOUNT_VOLUME}:${DEST_MOUNT_VOLUME}
+  # audiototext_worker:
+  #   image: audiototext_worker
+  #   build: 
+  #     context: ./audiototext
+  #     dockerfile: docker_files/Dockerfile.worker
+  #   environment: 
+  #     - REDIS_HOST=redis-server
+  #     - EXEC_MODE=worker
+  #     - MAPPED_VOLUME=${DEST_MOUNT_VOLUME}
+  #   entrypoint: /app/scripts/start__worker.sh
+  #   tty: true
+  #   depends_on:
+  #     - redis-server
+  #   volumes: 
+  #     - ${SRC_MOUNT_VOLUME}:${DEST_MOUNT_VOLUME}

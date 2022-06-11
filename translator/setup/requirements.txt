@@ -3,5 +3,10 @@ pandas
 scikit-learn
 transformers
 SpeechRecognition
-pyaudio
 pipwin
+pydub
+cherrypy
+redis
+rq
+tensorflow
+sentencepiece
