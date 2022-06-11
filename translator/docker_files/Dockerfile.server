@@ -1,5 +1,7 @@
 FROM python:3.8-slim
 
+#RUN apt-get install python3-pyaudio
+
 COPY setup/requirements.txt /setup/
 
 
@@ -20,4 +22,4 @@ COPY . /app
 
 EXPOSE 6000
 
-RUN chmod 755 /app/scripts/*.sh
+RUN chmod 755 /app/scripts/start_server.sh

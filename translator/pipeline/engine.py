@@ -1,3 +1,4 @@
+from inspect import trace
 import os
 import sys
 import json
@@ -11,6 +12,7 @@ env_dest_mnt_vol = os.environ.get("DEST_MOUNT_VOLUME")
 
 from utils.utils import convert_audio_to_text
 from transformers import AutoTokenizer,TFAutoModelForSequenceClassification,pipeline
+from pipeline.voice_generator import voice_generator
 
 
 def audio_translator_by_path(file_path,src_lang="en",target_lang=None):
@@ -61,10 +63,22 @@ def text_translate(text,src_lang="en",target_lang="fr"):
         }
     return result
 
-def text_to_audio(input_text,src_lang="fr",target_lang="fr"):
+def text_to_audio(input_text,target_file_path,src_lang="fr",target_lang="fr"):
     try:
         if src_lang == "fr" and target_lang == "fr":
-            pass
+            try:
+                voice_generator(target_file_path,input_text)
+            except Exception as e:
+                result = {
+                    "error": traceback.format_exc(),
+                    "description": "failed to generated voice from text"
+                }
+                return result
+            else:
+                result = {
+                    "target_file_path": target_file_path,
+                    "message" : "text to audio has been generated"
+                }
         else:
             result = {
                     "error": "language translation model is not found this combination",
@@ -78,6 +92,3 @@ def text_to_audio(input_text,src_lang="fr",target_lang="fr"):
         }
     return result
 
-
-if __name__ = "__main__":
-    
