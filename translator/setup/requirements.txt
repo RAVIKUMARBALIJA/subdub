@@ -1,0 +1,7 @@
+numpy
+pandas
+scikit-learn
+transformers
+SpeechRecognition
+pyaudio
+pipwin
