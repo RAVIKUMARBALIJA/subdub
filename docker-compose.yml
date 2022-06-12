@@ -2,6 +2,8 @@ version: '2.3'
 services:
   redis-server:
     image: redis:latest
+    ports:
+      - 6379:6379
   translator:
     image: translator
     build: 
