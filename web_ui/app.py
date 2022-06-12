@@ -1,19 +1,51 @@
 from flask import Flask,render_template,request
-import speech_recognition as sr 
 from werkzeug.utils import secure_filename
 import os 
-from pydub import AudioSegment
-from pydub.silence import split_on_silence
-r = sr.Recognizer()
+import time
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
+
     return render_template("index.html")
 
-# @app.route('/check_audio', methods = ['GET', 'POST'])
-# def check_audio():
+
+@app.route('/final_result')
+def final_result():
+    filename = "hello.wav"
+    return render_template("final_result.html",filenames = filename)
+
+
+@app.route('/record')
+def record():
+
+    return render_template("record.html")
+
+@app.route('/save_recording',methods=["POST"])
+def save_reco():
+    if request.method == "POST":
+        f = open('./file1.wav', 'wb')
+        f.write(request.get_data("audio_data"))
+        # ts = int(time.time())
+        # filename = "recording"+wav
+        f.close()
+        
+        return render_template("index.html")
+
+    route('/')
+
+
+@app.route("/translate_audio", methods=["POST"])
+def check_audio():
+    file = request.files['files']
+
+    # file.save(f'uploads/{file.filename}')
+            
+    filename = "final"+'.wav'
+    p = os.path.join('uploads/', filename)
+    file.save(p)
+    return "Successful"
 #     if request.method == 'POST':
 #         f = request.files['file']
 #         f.save(secure_filename(f.filename))
@@ -48,4 +80,4 @@ def home():
 
 
 if "__main__"== __name__:
-    app.run(debug=True)
+    app.run(debug = True)

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Recording</title>
+    <link rel="stylesheet" href="static/css/main.css" />
+    <noscript>
+        <link rel="stylesheet" href="static/css/noscript.css" />
+    </noscript>
+</head>
+
+<body class="is-preload">
+    <div id="wrapper">
+        <h1>Lets play your dubbed video!!!</h1>
+        <button class="playWAV">Play WAV</button>
+        <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+        <script src="/static/js/hello.js"></script>
+    </div>
+
+    <script>
+        function playSound(path) {
+            // audio supported?
+            if (typeof window.Audio === 'function') {
+                var audioElem = new Audio();
+                audioElem.src = path;
+                audioElem.play();
+            }
+        }
+
+        // event listeners
+        document.querySelector('.playWAV').addEventListener('click', function () {
+            playSound('hello.wav');
+        });
+    </script>
+</body>
+
+</html>

@@ -27,14 +27,10 @@
 		<!-- Menu -->
 		<nav id="menu">
 			<ul class="links">
-				<li><a href="index.html">Home</a></li>
-				<li><a href="landing.html">Landing</a></li>
-				<li><a href="generic.html">Generic</a></li>
-				<li><a href="elements.html">Elements</a></li>
-			</ul>
-			<ul class="actions stacked">
-				<li><a href="#" class="button primary fit">Get Started</a></li>
-				<li><a href="#" class="button fit">Log In</a></li>
+				<li><a href="">Home</a></li>
+				<li><a href=""></a></li>
+				<li><a href=""></a></li>
+				<li><a href=""></li>
 			</ul>
 		</nav>
 
@@ -66,9 +62,9 @@
 					<header class="major">
 						<h3>Upload Your Cassete📼</h3>
 						<p>Elli Upload madi boss</p>
-						<form action="">
-							<input type="file" name="file" />
-							<input type="submit" />
+						<form action="/translate_audio" enctype="multipart/form-data" method="post">
+							<input type="file" name="files">
+							<input type="submit" value="upload">
 						</form>
 					</header>
 				</article>
@@ -77,22 +73,25 @@
 						<img src="images/pic02.jpg" alt="" />
 					</span>
 					<header class="major">
-						<h3>Tempus</h3>
 						<div id="controls">
 							<button id="recordButton">Record</button>
 							<button id="pauseButton" disabled>Pause</button>
 							<button id="stopButton" disabled>Stop</button>
-						</div>
-						<p><strong>Recordings:</strong></p>
-						<ol id="recordingsList"></ol>
+						   </div>
 					</header>
+					<div id="formats">Format: start recording to see sample rate</div>
+					<p><strong>Recordings:</strong></p>
+						<ol id="recordingsList"></ol>
 				</article>
 			</section>
+			<section>
+				
+			</section>
 		</div>
-
 	</div>
 
-	<!-- Scripts -->
+	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+	<script src="static/js/hello.js"></script>
 	<script src="static/js/jquery.min.js"></script>
 	<script src="static/js/jquery.scrolly.min.js"></script>
 	<script src="static/js/jquery.scrollex.min.js"></script>
@@ -100,6 +99,8 @@
 	<script src="static/js/breakpoints.min.js"></script>
 	<script src="static/js/util.js"></script>
 	<script src="static/js/main.js"></script>
+	<script src="static/js/WebAudioRecorder.min.js"></script>
+	<script src="static/js/app.js"></script>
 
 </body>
 

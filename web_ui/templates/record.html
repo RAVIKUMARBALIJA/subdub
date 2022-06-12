@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Recording</title>
+    <link rel="stylesheet" href="static/css/main.css" />
+    <noscript>
+        <link rel="stylesheet" href="static/css/noscript.css" />
+    </noscript>
+</head>
+
+<body class="is-preload">
+    <div id="wrapper">
+        <h1>Please Record your voice here</h1>
+        <div id="controls">
+            <button id="recordButton">Record</button>
+            <button id="pauseButton" disabled>Pause</button>
+            <button id="stopButton" disabled>Stop</button>
+        </div>
+        <div id="formats">Format: start recording to see sample rate</div>
+        <p><strong>Recordings:</strong></p>
+        <ol id="recordingsList"></ol>
+        <a href="/">Click back to Home page for translation</a>
+        <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+        <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+        <script src="/static/js/hello.js"></script>
+    </div>
+</body>
+
+</html>
