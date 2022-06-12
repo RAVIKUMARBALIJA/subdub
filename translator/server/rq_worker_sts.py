@@ -21,7 +21,7 @@ def main():
 
     redis_conn = Redis(host=redis_config["HOST"], port=redis_config["PORT"])
     with Connection(redis_conn):
-        worker = SimpleWorker(["aa_queue"])
+        worker = SimpleWorker([redis_config["STS"]])
         worker.work()
 
 if __name__ == '__main__':

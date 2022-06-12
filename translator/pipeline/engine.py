@@ -10,24 +10,37 @@ env_redis_host = os.environ.get("REDIS_HOST")
 env_src_mnt_vol = os.environ.get("SRC_MOUNT_VOLUME")
 env_dest_mnt_vol = os.environ.get("DEST_MOUNT_VOLUME")
 
-from utils.utils import convert_audio_to_text
+from utils.utils import convert_audio_to_text,text_to_speech
 from transformers import AutoTokenizer,TFAutoModelForSequenceClassification,pipeline
 from pipeline.voice_generator import voice_generator
 
 
 def audio_translator_by_path(file_path,src_lang="en",target_lang=None):
-    if file_path is not None and os.path.exists(file_path):
-        result = convert_audio_to_text(file_path)
-        if "error" in result:
-            return result
+    try:
+        if file_path is not None and os.path.exists(file_path):
+            result = convert_audio_to_text(file_path)
+            if "error" in result:
+                return result
+            else:
+                translated_text = text_translate(result["text"],target_lang="fr")
+                if "text" in translated_text:
+                    result = translated_text["text"]
+                    result = text_to_audio(result)
+                    return result
+                else:   
+                    return result
         else:
-            translated_text = text_translate(result["text"],target_lang="fr")
-            return result
-    else:
+            result = {
+                "error": "file_not_found",
+                "description": "file_not_found"
+            }
+    except Exception as e:
+        print(traceback.format_exc())
         result = {
-            "error": "file_not_found",
-            "description": "file_not_found"
+            "error":  "error occured while translating text",
+            "description": traceback.format_exc()
         }
+    return result
 
 def audio_to_text_by_path(file_path,src_lang="en",target_lang='en'):
     if file_path is not None :
@@ -67,7 +80,7 @@ def text_to_audio(input_text,target_file_path,src_lang="fr",target_lang="fr"):
     try:
         if src_lang == "fr" and target_lang == "fr":
             try:
-                voice_generator(target_file_path,input_text)
+                text_to_speech(input_text,target_file_path)
             except Exception as e:
                 result = {
                     "error": traceback.format_exc(),
@@ -91,4 +104,7 @@ def text_to_audio(input_text,target_file_path,src_lang="fr",target_lang="fr"):
             "description": traceback.format_exc()
         }
     return result
+
+if __name__ == "__main__":
+    result = audio_translator_by_path("/home/ravikumar/Downloads/123.wav")
 

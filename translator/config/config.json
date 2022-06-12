@@ -1,7 +1,11 @@
 {
     "REDIS": {
     "HOST": "localhost",
-    "PORT": 6379
+    "PORT": 6379,
+    "STS": "STS",
+    "TTS": "TTS",
+    "STT": "STT",
+    "TTT": "TTT"
     },
     "REST_SERVER": {
         "server.socket_host": "0.0.0.0",

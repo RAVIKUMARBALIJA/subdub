@@ -34,10 +34,10 @@ class AudioDubAPI:
         global queue_audio_to_audio
         
 
-        queue_audio_to_text = rq.Queue(name="at_queue", default_timeout='60m', connection=redis_conn)
-        queue_text_to_text = rq.Queue(name="tt_queue", default_timeout='60m', connection=redis_conn)
-        queue_text_to_audio = rq.Queue(name="ta_queue", default_timeout='60m', connection=redis_conn)
-        queue_text_to_audio = rq.Queue(name="aa_queue", default_timeout='60m', connection=redis_conn)
+        queue_audio_to_text = rq.Queue(name="STT", default_timeout='60m', connection=redis_conn)
+        queue_text_to_text = rq.Queue(name="TTT", default_timeout='60m', connection=redis_conn)
+        queue_text_to_audio = rq.Queue(name="TTS", default_timeout='60m', connection=redis_conn)
+        queue_text_to_audio = rq.Queue(name="STS", default_timeout='60m', connection=redis_conn)
 
     @cherrypy.expose
     @cherrypy.tools.json_in()

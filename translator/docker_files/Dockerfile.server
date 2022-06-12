@@ -1,21 +1,45 @@
-FROM python:3.8-slim
+FROM ubuntu:18.04
 
-#RUN apt-get install python3-pyaudio
+RUN apt-get update
+RUN apt-get -y install wget
+RUN apt-get -y install build-essential
+RUN apt-get -y install software-properties-common
+RUN apt-get --allow-releaseinfo-change update
+
+RUN apt-get -y  install make
+RUN apt-get -y install git-core
+RUN apt-get install unzip
+RUN apt-get -y install vim
+RUN apt-get -y install curl
+
+
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+ENV PATH /opt/conda/bin:$PATH
+
+RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
+    libglib2.0-0 libxext6 libsm6 libxrender1 \
+    git mercurial subversion
+
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.3-Linux-x86_64.sh -O ~/anaconda.sh && \
+    /bin/bash ~/anaconda.sh -b -p /opt/conda && \
+    rm ~/anaconda.sh && \
+    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate base" >> ~/.bashrc
 
 COPY setup/requirements.txt /setup/
 
-
-RUN pip install --trusted-host pypi.python.org --no-cache-dir -r /setup/requirements.txt && \
-    pip install --upgrade pip
-
-RUN export PYTHONPATH=.
 
 ADD . /app
 
 WORKDIR /app
 
-ENV PYTHONUNBUFFERED 1
-ENV DISPLAY=:99
+RUN pip install --trusted-host pypi.python.org --no-cache-dir -r setup/requirements.txt
+
+RUN export PYTHONPATH=.
+
+# ENV PYTHONUNBUFFERED 1
+# ENV DISPLAY=:99
 
 
 COPY . /app
