@@ -13,9 +13,9 @@ ROOT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__
 def main():
     config = load_json_file(os.path.join(ROOT_DIR,"config", "config.json"))
 
-    env_redis_host = os.environ.get('REDIS_HOST')
+    env_redis_host = os.environ.get('REDIS_HOST', '127.0.0.1')
     if env_redis_host is not None:
-        config['REDIS']['HOST'] = os.environ.get('REDIS_HOST')
+        config['REDIS']['HOST'] = os.environ.get('REDIS_HOST', '127.0.0.1')
 
     redis_config = config["REDIS"]
 

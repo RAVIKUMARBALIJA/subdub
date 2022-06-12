@@ -6,7 +6,7 @@ import traceback
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(ROOT_DIR)
-env_redis_host = os.environ.get("REDIS_HOST")
+env_redis_host = os.environ.get('REDIS_HOST', '127.0.0.1')
 env_src_mnt_vol = os.environ.get("SRC_MOUNT_VOLUME")
 env_dest_mnt_vol = os.environ.get("DEST_MOUNT_VOLUME")
 

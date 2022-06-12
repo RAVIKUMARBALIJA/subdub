@@ -21,9 +21,9 @@ from utils.utils import load_json_file
 
 config = load_json_file(os.path.join(ROOT_DIR,"config/config.json"))
 
-env_redis_host = os.environ.get('REDIS_HOST')
+env_redis_host = os.environ.get('REDIS_HOST', '127.0.0.1')
 if env_redis_host is not None:
-    config['REDIS']['HOST'] = os.environ.get('REDIS_HOST')
+    config['REDIS']['HOST'] = os.environ.get('REDIS_HOST', '127.0.0.1')
 
 class AudioDubAPI:
     def __init__(self,redis_host,redis_port):
