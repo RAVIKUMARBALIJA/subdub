@@ -1,16 +1,16 @@
 ### Audio to Audio translation.
 *******************************
 
-## Software tools Used :
+#### Software tools Used :
     VS Code, Jupyter notebook, Google Colab, Github, Docker.io
 
-## Front end :
+#### Front end :
     HTML, CSS, JS
-## Back end:
+#### Back end:
     Python, flask, CherryPy, Redis, rq
 
 
-## Machine learning/Deep Learning:
+#### Machine learning/Deep Learning:
     - Text to Text translation [ En - > Fr ]
     - Audio to Audio transalation
     - Speech to Text translation
@@ -18,7 +18,7 @@
     - Speech Recognition
     - Signal processing using Librosa
 
-## Research Papers explored:
+#### Research Papers explored:
     - WaveRNN
     - WaveGAN
     - LSTM Based Speech to Speech Generation
